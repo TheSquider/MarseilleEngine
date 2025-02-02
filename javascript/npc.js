@@ -63,7 +63,7 @@ function npcDialog(id, ds) {
 function setDialog() { 
     let read = toRead;
 
-    let readArray = read.split('gAy~ ');
+    let readArray = read.split('NW ');
     readArray.shift();
     let readArrayFinal = [];
 
