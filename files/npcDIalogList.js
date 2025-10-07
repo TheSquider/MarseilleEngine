@@ -7,6 +7,7 @@ const toRead =
 "NW 5 # Depression is an upward battle you win by being hunan. # For me being human means creating art and connecting with others through it. # Depression is an upward battle I win by creating towards the sky." +
 "NW 45 # I hate the fact that Im forced to look like §. # Actually I dont have to be § anymore # The dude updated the code! # Actually never mind it's broken now. # This place is really a testament to development huh?" +
 "NW 89 # I # AM # SO # HAPPY # CMD#document.body.style.background = 'red'CMD#MUAHAHAHHA # ... # CMD#document.body.style.background = '#ffdead'CMD#Ok I'm sorry..." +
+"NW 91 # This is a trapdoor # Pressing Q again will take you to the underbelly of this world # CMD#window.location.href ='./tst.html'CMD#" +
 
 
 "NW 99 # Controls are: WASD to move, Q to interact, P to open the menu, [ and ] to navigate, and O to select." +
@@ -14,4 +15,9 @@ const toRead =
 "NW 101 # Art and software should be free, and above all human. If you end up making anything with this engine please don't monitise it and above all share it. # I will be hearing feedback and the GitHub link is on the itch.io page. # Email me (and I will respond) at frechsquid.headcanon@gmail.com" +
 "NW 102 # If you press Q again you will go to a test game to see more of the capabilities of the engine, press P to quit. # CMD#window.location.href = './index.html'CMD#" +
 
-"NW 666 # I used to do something debug related but I was replaced by the console. # Even though I just occupy code now, I still enjoy looking at the other NPCs doing what they are meant to be doing. # One day I'll get reporpused. # One day I'll get reporpused.. # One day I'll get reporpused..."
+"NW 666 # I used to do something debug related but I was replaced by the console. # Even though I just occupy code now, I still enjoy looking at the other NPCs doing what they are meant to be doing. # One day I'll get reporpused. # One day I'll get reporpused.. # One day I'll get reporpused..." +
+
+"NW 92 # This is a trapdoor # Pressing Q again will take you back # CMD#window.location.href ='./index.html'CMD#" +
+"NW 90 # I'm just a test dummy # I hate my life # I hate it." +
+"NW 93 # Hi" +
+"NW 94 # What"

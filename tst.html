@@ -8,8 +8,8 @@
     <script src="./javascript/basics.js"></script>
     <script src="./javascript/menu.js"></script>
     <script src="./javascript/quests.js"></script>
+
     <script src="./files/npcDIalogList.js"></script>
-    <title>WELCOME</title>
     <style>
         body {
             background-color: white;
@@ -24,17 +24,23 @@
             color: black;
         }
     </style>
+    <title>TST</title>
 </head>
-<body onkeypress="controls(document.getElementById('player'), event)" onload="setObj(document.getElementsByClassName('object'), [0, 100]); setTXT(document.getElementById('txt')); randomMove([10, 50], [99]); setDialog();">
+<body onkeypress="controls(document.getElementById('player'), event)" onload="setObj(document.getElementsByClassName('object'), [0, 390]); setTXT(document.getElementById('txt')); randomMove([0, 500], [90]); setDialog();">
     <div id="player">@</div>
     <div id="txt">if you are reading this something is terribly wrong :)</div>
+    <div id="loading">Running In Circles :o</div>
 
-    <div class="object npc">PRESS Q ON ME(THE P)#10#10#99</div>
-    <div class="object">ISWALLISWA#0#40</div>
-    <div class="object">WALLISWALL#0#60</div>
-    <div class="object npc">LLISWALLIS#0#50#103</div>
-    <div class="object npc">GO#10#90#102</div>
-    <div class="object npc">?#40#90#100</div>
-    <div class="object npc">!#70#90#101</div>
+
+    <div class="object">HHHHH#190#310</div>
+    <div class="object">LJ#190#350</div>
+    <div class="object">7#190#270</div>
+
+    <div class="object path">0#120#220</div>
+    <div class="object path">000000#120#230</div>
+    <div class="object path">0#170#240</div>
+
+    <div class="object npc">§#10#20#90</div>
+    <div class="object npc">H#250#380#92</div>
 </body>
 </html>

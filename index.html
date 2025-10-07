@@ -7,13 +7,16 @@
     <script src="./javascript/npc.js"></script>
     <script src="./javascript/basics.js"></script>
     <script src="./javascript/menu.js"></script>
+    <script src="./javascript/quests.js"></script>
+
     <script src="./files/npcDIalogList.js"></script>
     <title>HUB</title>
 </head>
-<body onkeypress="controls(document.getElementById('player'), event, [0, 500])" onload="setObj(document.getElementsByClassName('object')); setTXT(document.getElementById('txt')); randomMove([0, 500], [45,2]); setDialog();">
+<body onkeypress="controls(document.getElementById('player'), event)" onload="setObj(document.getElementsByClassName('object'), [0, 500]); setTXT(document.getElementById('txt')); randomMove([0, 500], [45,2]); setDialog();">
     <div id="player">@</div>
     <div id="txt">if you are reading this something is terribly wrong :)</div>
-    
+    <div id="loading">Loading In Place :)</div>
+
     <div class="object">||||||||||||#0#100</div>
     <div class="object">|#130#0</div>
     <div class="object">|#130#10</div>
@@ -58,6 +61,7 @@
 
     <div class="object">HHHHH#190#310</div>
     <div class="object">LJ#190#350</div>
+    <div class="object npc">O#250#380#91</div>
 
     <div class="object path">0#120#100</div>
     <div class="object path">0#120#110</div>
@@ -90,7 +94,7 @@
     <div class="object npc">D#30#300#5</div>
 
     <div class="object npc">Ÿ#300#300#4</div>
-    <div class="object path">Ÿ#320#300</div>
+    <div class="object">Ÿ#320#300</div>
     <div class="object npc">Ÿ#340#300#6</div>
 </body>
 </html>

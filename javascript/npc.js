@@ -1,54 +1,32 @@
 let dbgnmbr2 = 0; //DEBUG
-let npcDialogOpt = [
-    /*[0, 'ERROR NO VALID DIALOG, VAR InternalID RETURNED 0 AT npc.js'],
-    [1, 'I hate taxes', 'That is why I dont pay them', 'I will die', 'Oh well!'],
-    [2, 'I have romantic feelings torwards NPCID#45 and I am going insane because of it!'],
-    [45, 
-        'I hate the fact that Im forced to look like §.',
-        'Actually I dont have to be § anymore',
-        'The dude updated the code!',
-        '*CHANGES FORM*',
-        "CMD#npcElement[InternalId-2].innerHTML='R';CMD#(move please)",
-        "CMD#npcElement[InternalId-2].innerHTML='§';CMD#Cool huh?",
-    ],
-    [89, 'I', 'AM', 'so happy to see you!', "CMD#document.body.style.background = 'red'CMD#AND ALSO ALIVE MUAHAHAHHA", '...', "CMD#document.body.style.background = '#ffdead'CMD#Ok I'm sorry..."],
-    [666, 'lol'],
-    [4, 'Its a tree.', "CMD#menuBool=true;CMD#Do What?<ul><li id='A'>SAVE</li><li id='B'>HARVEST</li></ul>"],
-
-    [99, 'Controls are: WASD to move, Q to interact, P to open the menu, [ and ] to navigate, and O to select.'],
-    [100, "Everything you see in changable. You can work within the guidelines I've given you or colour outside the page. Full documentatiion comes with the free download.", "See this more of a jumping board for ideas, not a limitation. I've tried to make this engine simple to work with while still letting people mess with the code itself."],
-    [101, "Art and software should be free, and above all human. If you end up making anything with this engine please don't monitise it and above all share it.", "I will be hearing feedback and the GitHub link is on the itch.io page.", "Email me (and I will respond) at frechsquid.headcanon@gmail.com"],
-    [102, "If you press Q again you will go to a test game to see more of the capabilities of the engine, press P to quit.", "CMD#window.location.href = './index.html'CMD#"],
-    [103, "Hey you found the obligatory secret in the wellcome page, how neet!"]*/
-];
-
-
+let npcDialogOpt = [];
+let InternalId = 0;
 //
 //
 //DIALOG
-function npcDialog(id, ds) {
-    dbgnmbr2 = dbgnmbr; //Ignore this DEBUG
-    /*if (dbgnmbr2 > 3) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, go make faster code'}
-    if (dbgnmbr2 < 3 && dbgnmbr2 > 1) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, it is ok'}
-    if (dbgnmbr2 < 1) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, damn that is fast'}*/
-
+function npcDialog(id) { //dialogStage is from basics.js
     let output = 'ERROR';
+    let talk = new Audio('./files/sound/talk.wav');
+    
 
     if (appBool == false) { //Checks if an interal ID has be found
         for (let i = 0; i < npcDialogOpt.length; i++) { //Finds internal ID
-            if (id == npcDialogOpt[i][0]) {InternalId = i}
+            if (id == npcDialogOpt[i][0]) {InternalId = i;}
         }
     }
     
-    if (ds !== npcDialogOpt[InternalId].length) { //This exists for scripts run through dialog
-        let cmd = npcDialogOpt[InternalId][ds].split('CMD#');
+    
+    if (dialogStage !== npcDialogOpt[InternalId].length) { //This exists for scripts run through dialog
+        let cmd = npcDialogOpt[InternalId][dialogStage].split('CMD#');
 
         if (cmd.length > 1) {cmd.shift(); eval(cmd[0]); output=cmd[1];} else {
-        output = cmd[0];}
+        output = cmd[0];} //here all output is set, cmd is our god
     }
+
     glbtxt.innerHTML = output;
+    if(dialogStage != npcDialogOpt[InternalId].length){talk.play();}
     
-    if (appBool == true && ds == npcDialogOpt[InternalId].length ) {
+    if (appBool == true && dialogStage == npcDialogOpt[InternalId].length) {
         dialogStage = 0;
         InternalId = 0;
         appBool = false;
@@ -60,7 +38,8 @@ function npcDialog(id, ds) {
         document.body.appendChild(glbtxt);
     }
 }
-function setDialog() { 
+
+function setDialog() { //Ignore this
     let read = toRead;
 
     let readArray = read.split('NW ');
@@ -80,13 +59,15 @@ function setDialog() {
 //
 //
 //MOVEMENT
-function randomMove(npcMargins, idGiven) {
-    //The air is quite, the birds are out, the clouds are hugging the eart. It's so nice today, I think I'll go for a walk.
+/*function randomMove(npcMargins, idGiven) { //BROKEN AS SHIT
 
-    let A2 = performance.now(); //ignore this DEBUG
+    
+    //The air is quite, the birds are out, the clouds are hugging the earth. It's so nice today, I think I'll go for a walk.
+
+    // let A2 = performance.now(); //ignore this DEBUG
+
     if(!idGiven && idGiven !== 0){return null;}
-
-    let spd = 10;
+    
     let time = 0;
     let InteralIDMovement = [];
     for (let o = 0; o < idGiven.length; o++) {
@@ -95,58 +76,127 @@ function randomMove(npcMargins, idGiven) {
         }
     }
 
-    function MV(spd, xy, id) {
-        npcPos[id][xy] += spd;
+    function MVnpc(spd, xy, id) {
+        npc[id][xy] += spd;
         for (let i = 0; i < objsPos.length; i++) {
-            if (npcPos[id].toString() === objsPos[i].toString()) {
-                npcPos[id][xy] -= spd;
+            if (npc[id].toString() === objsPos[i].toString()) {
+                npc[id][xy] -= spd;
             }
         }
     }
 
-    while (time < 9999) {
-        let rand = Math.abs((Math.floor(Math.random()*10)-5));
-        time += rand;
+    //while (time < 999) { why did I ever use a while statement what????
+    let rand = Math.abs((Math.floor(Math.random()*10)));
+    time += rand + 1;
 
-        setTimeout(() => {
-        let rand2 = 2;
-        for (let i = 0; i < InteralIDMovement.length; i++) {
-            const id = InteralIDMovement[i];
-            rand2 = (Math.floor(Math.random()*10));
+    setTimeout(() => { //omg this sucks
+    let rand2 = 2;
+    for (let i = 0; i < InteralIDMovement.length; i++) {
+        const id = InteralIDMovement[i];
+        rand2 = (Math.floor(Math.random()*10));
 
-            if (npcPos[id].toString() !== pos.toString()) {
-                if (rand2 > 2) {
-                    if (rand < 2) {
-                        MV(spd, 0, id);
-                    } else {
-                        MV(spd*-1, 0, id)
-                    }
+        if (npc[id].toString() !== pos.toString()) { //if the player isn't topping you
+            if (rand2 > 2) {
+                if (rand < 2) {
+                    MVnpc(spd, 0, id);
                 } else {
-                    if (rand < 2) {
-                        MV(spd, 1, id);
-                    } else {
-                        MV(spd*-1, 1, id);
-                    }
+                    MVnpc(spd*-1, 0, id)
                 }
-        
-                for (let i = 0; i < npcPos[id].length; i++) {
-                    const check = npcPos[id][i];
-                    
-                    if(check < npcMargins[0]){
-                        npcPos[id][i] += spd;
-                    }
-                    if (check > npcMargins[1]) {
-                        npcPos[id][i] -= spd;
-                    }
+            } else {
+                if (rand < 2) {
+                    MVnpc(spd, 1, id);
+                } else {
+                    MVnpc(spd*-1, 1, id);
                 }
-                applypos(npcPos[id], npcElement[id]);
-            }}
-        }, time * 500);
-    }
-    //console.log((time * 0.5)/3600 + ' hours');
+            }
     
+            for (let i = 0; i < npc[id].length; i++) {
+                const check = npc[id][i];
+                
+                if(check < npcMargins[0]){
+                    npc[id][i] += spd;
+                }
+                if (check > npcMargins[1]) {
+                    npc[id][i] -= spd;
+                }
+            }
+            applypos(npc[id], npcElement[id]);
+        }}
+        randomMove(npcMargins, idGiven); //Propably can be optimized
+    }, time * 500);
 
-    let B2 = performance.now();
-    dbgnmbr2 = (B2 - A2);
-    console.log(dbgnmbr2 + ' ms @ ' + idGiven.length + ' MOVING NPCs');
+    // let B2 = performance.now();
+    // dbgnmbr2 = (B2 - A2);
+    // console.log(dbgnmbr2 + ' ms @ ' + InteralIDMovement.length + ' MOVING NPCs');
+}*/
+
+let InternalIDMV = [];
+let npcBox = []; //1-1 with InternalIDMV, the box where an npc is allowed to move
+function randomMove(Margins, idGiven, plus) { //to be called by the html file
+    for (let i = 0; i < idGiven.length; i++) {
+        for (let o = 0; o < npc.length; o++) {
+            if (idGiven[i] == npc[o][2]) {
+                InternalIDMV.push(o);
+                let temp = [npc[o][0]+Margins[0], npc[o][1]+Margins[1], npc[o][0]-Margins[0], npc[o][1]-Margins[1]];
+                npcBox.push(temp)
+            }
+        }
+    }
+    ranMovement();
+}
+function ranMovement() {
+    let time = Math.floor((Math.random()*10)+1);
+
+    setTimeout(() => { //clock
+        for (let i = 0; i < InternalIDMV.length; i++) { 
+            const cIID = InternalIDMV[i]; //for the npc array
+            
+            let npcPos = [npc[cIID][0], npc[cIID][1]]; 
+            if (npcPos.toString() !== pos.toString()) { //player
+                let ran = Math.floor((Math.random()*4)+1);
+                
+                // Make newPos array for checking, check for walls and margins (that start at the NPC first position)
+                switch (ran) {
+                    case 1:
+                        npcPos[0] += 10;
+                        break;
+                    
+                    case 2:
+                        npcPos[0] -= 10;
+                        break;
+                    case 3:
+                        npcPos[1] += 10;
+                        break;
+                    case 4:
+                        npcPos[1] -= 10;
+                        break;
+                }
+                let doMV = true;
+                for (let i = 0; i < objsPos.length; i++) { //Objects
+                    if (npcPos.toString() == objsPos[i].toString()) {
+                        doMV = false;
+                    }
+                } //could use the includes function somehow but naahhhh 
+                for (let i = 0; i < npcPos.length; i++) { //Margins
+                    const check = npcPos[i];
+        
+                    if(check < margins[0] || check > margins[1]){
+                        doMV = false;
+                    }
+                }
+                if (!(npcPos[0] <= npcBox[i][0] && npcPos[0] >= npcBox[i][2]) || !(npcPos[1] <= npcBox[i][1] && npcPos[1] >= npcBox[i][3])) {
+                    doMV = false;
+                    // really verbose//non-flexible but it works
+                       
+                }
+                
+                if (doMV == true) {
+                    npc[cIID][0] = npcPos[0]; npc[cIID][1] = npcPos[1]; 
+                    applypos(npcPos, npc[cIID][3])
+                }
+            }
+        }
+
+        ranMovement();
+    }, time*500);
 }

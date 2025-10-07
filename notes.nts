@@ -8,13 +8,18 @@
     !-Sometimes NPCs clip through walls and idk why (not an issue, rare)
 #Do paths (done-for now)
 #Do NPC dialog choice (THEY CAN FUCKING RUN CODE LESSS GOOOO) (Can work with menu) (Is tied with menu)
-#Do NPC dialog seporate from npc.js (How am I going to get a filesystem working without Node.js?)
+#Do NPC dialog seporate from npc.js (How am I going to get a filesystem working without Node.js?) (no need, did it)
 #FIX CLASSES (Will do later)
 #Generalise Menu (done-but now I HAVE to make a seporate file for menu interactions)
 #Do items
 #Do quests
+#Q spamming
+#Movement for NPCs (done) (what about margins for specific NPCs?)
+#Loading screen (done)
 
-Rooted class names (basic.js, ln: 131 & 147-152)
-The problem of apperance
+Rooted class names (basic.js, ln: 131 & 147-152) (done)
+The problem of apperance (solved for player)
 The menu question (solved)
-NPCs get stuck near walls
+NPCs get stuck near walls (no?)
+
+

@@ -9,24 +9,21 @@ let menuBool = false; //Used only in basics.js, here only for ease
 let menuOptionsDefault = ['0', '1', '2'];
 let menuTextDefault = ['STATISTICS', 'QUESTS', 'ITEMS']
 let menuScreens = [
-    "This is health", 
-    "This is your quest", 
-    "This is an item"
+    "There are no Statistics in this level. Your EXP wont save you.", 
+    "You have no Quests! What even is your purpose in life?", 
+    "You also have nothing."
 ]
 
-function setTXT(txt) {
-    //console.time();
+function setTXT(txt) { //to be called by the body
     glbtxt = txt;
     txt.remove();
     appBool = false;
-    //console.timeEnd();
-    //console.log('@ TXTBOX');
 }
 
 //MENU
 //
 //I don't know how in-options menus will work (like getting to specific item or quest)
-function menu(menuOptions, menuText) {
+function menu(menuOptions, menuText) { //Why do I need them as arguments when they are already in the file? Flexibility? Idk what I was thinking. If it works dont fix it.
     let txtToGive = "<ul>"
     for (let i = 0; i < menuOptions.length; i++) {
         const opt = menuOptions[i];
@@ -41,9 +38,10 @@ function menu(menuOptions, menuText) {
     
     dialogOption = 0;
     appBool = true;
+    //90% of this is housekeeping flexibility stuff. Life is cruel.
 }
 function selectMenu(LoR, menuOptions) {
-    console.log(menuOptions[dialogOption]);
+    //console.log(menuOptions[dialogOption]);
     
     dialogOption += LoR; if(dialogOption > menuOptions.length-1){dialogOption = menuOptions.length-1}if(dialogOption < 0){dialogOption = 0}
     
